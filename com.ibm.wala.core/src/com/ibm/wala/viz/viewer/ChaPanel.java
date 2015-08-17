@@ -10,7 +10,10 @@
  *******************************************************************************/
 package com.ibm.wala.viz.viewer;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -98,9 +101,17 @@ public class ChaPanel extends JSplitPane {
       return;
     }
 
+    Comparator<IClass> comparator = new Comparator<IClass>() {
+      public int compare(IClass c1, IClass c2) {
+        return c1.toString().compareTo(c2.toString()); // use your logic
+      }
+    };
+
     if (treeNode.getChildCount() == 0) {
       IClass klass = (IClass) treeNode.getUserObject();
-      Collection<IClass> immediateSubclasses = cha.getImmediateSubclasses(klass);
+      ArrayList<IClass> al = new ArrayList<IClass>(cha.getImmediateSubclasses(klass));
+      Collections.sort(al, comparator);
+      Collection<IClass> immediateSubclasses = al;
       for (IClass immediateSubclass : immediateSubclasses){
         treeNode.add(new DefaultMutableTreeNode(immediateSubclass));
       }

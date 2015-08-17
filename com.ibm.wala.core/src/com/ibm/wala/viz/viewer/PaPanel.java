@@ -13,6 +13,7 @@ package com.ibm.wala.viz.viewer;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import com.ibm.wala.analysis.pointers.HeapGraph;
+import com.ibm.wala.classLoader.CallSiteReference;
 import com.ibm.wala.ipa.callgraph.CGNode;
 import com.ibm.wala.ipa.callgraph.CallGraph;
 import com.ibm.wala.ipa.callgraph.propagation.InstanceFieldPointerKey;
@@ -234,6 +236,11 @@ public class PaPanel extends JSplitPane {
    * @return
    */
   protected List<Object> getChildrenFor(Object node) {
+    Comparator<Object> comparator = new Comparator<Object>() {
+      public int compare(Object c1, Object c2) {
+        return c1.toString().compareTo(c2.toString()); // use your logic
+      }
+    };
     List<Object> ret = new ArrayList<Object>();
     if (node instanceof InstanceKey){
       ret.addAll(getPointerKeysUnderInstanceKey((InstanceKey) node));
@@ -248,6 +255,7 @@ public class PaPanel extends JSplitPane {
     } else {
       assert false : "Unhandled Node : " + node;
     }
+    Collections.sort(ret,comparator);
     return ret;
   }
 
