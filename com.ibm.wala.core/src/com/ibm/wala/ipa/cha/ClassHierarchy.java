@@ -133,6 +133,9 @@ public class ClassHierarchy implements IClassHierarchy {
    */
   private Collection<TypeReference> runtimeExceptionTypeRefs;
 
+  //agung: add typereference
+  private static TypeReference TReference;
+
   /**
    * Return a set of {@link IClass} that holds all superclasses of klass
    * 
@@ -852,6 +855,8 @@ public class ClassHierarchy implements IClassHierarchy {
     // first delegate lookup to the parent loader.
     if (parent != null) {
       TypeReference p = TypeReference.findOrCreate(parent, a.getName());
+      // agung: assign TReference
+      this.TReference = p;
       IClass c = lookupClassRecursive(p);
       if (c != null) {
         return c;
@@ -1338,4 +1343,9 @@ public class ClassHierarchy implements IClassHierarchy {
   }
 
 /** END Custom change: remember unresolved classes */
+
+    // agung: access TReference
+    public static TypeReference getTypeReference(){
+	return TReference;
+    }
 }
