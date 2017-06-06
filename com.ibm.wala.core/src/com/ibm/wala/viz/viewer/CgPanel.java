@@ -107,6 +107,18 @@ public class CgPanel extends JSplitPane{
     if (rec == 0) {
       return;
     }
+    
+    Comparator<CallSiteReference> comparator = new Comparator<CallSiteReference>() {
+      public int compare(CallSiteReference c1, CallSiteReference c2) {
+        return c1.toString().compareTo(c2.toString()); // use your logic
+      }
+    };
+    
+    Comparator<CGNode> comparator2 = new Comparator<CGNode>() {
+      public int compare(CGNode c1, CGNode c2) {
+        return c1.toString().compareTo(c2.toString()); // use your logic
+      }
+    };
 
     Comparator<CallSiteReference> comparator = new Comparator<CallSiteReference>() {
       public int compare(CallSiteReference c1, CallSiteReference c2) {

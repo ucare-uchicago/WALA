@@ -100,6 +100,12 @@ public class ChaPanel extends JSplitPane {
     if (rec == 0) {
       return;
     }
+    
+    Comparator<IClass> comparator = new Comparator<IClass>() {
+      public int compare(IClass c1, IClass c2) {
+        return c1.toString().compareTo(c2.toString()); // use your logic
+      }
+    };
 
     Comparator<IClass> comparator = new Comparator<IClass>() {
       public int compare(IClass c1, IClass c2) {

@@ -1344,8 +1344,8 @@ public class ClassHierarchy implements IClassHierarchy {
 
 /** END Custom change: remember unresolved classes */
 
-    // agung: access TReference
-    public static TypeReference getTypeReference(){
-	return TReference;
-    }
+  // agung: access TReference
+  public static TypeReference getTypeReference(){
+    return TReference;
+  }
 }
